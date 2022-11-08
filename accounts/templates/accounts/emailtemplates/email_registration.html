@@ -1,0 +1,99 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            background-color: aliceblue;
+            text-align: center;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .footer,.header{
+            background-color: rgb(156, 212, 247);
+            padding: 1.2rem;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 1fr ;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(156, 212, 247);
+            padding: 1.2rem;
+        }
+        .maincontent{
+            min-height: 30vh;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        h4{
+            margin: auto;
+        }
+        h4 img{
+            padding: 1.4rem;
+        }
+        a{
+            text-decoration: none;
+            padding: 1.2rem;
+            background-color: rgb(67, 179, 227);
+            border-radius: 1rem;
+            font-size: 1.2rem;
+            margin: 1rem;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+           
+            <div class="head-content">
+                <h2>CAPS Session Booking System</h2>
+            </div>
+            
+        </div>
+
+        <div class="maincontent">
+            <img src="" alt="">
+            <p>
+                <!-- Subject: CAPS Registration -->
+
+                Hello {{temuser.first_name}}{{tempuser.last_name}} 
+                <br>
+                Greetings from CAPS!
+                <br>
+                You have been registered as {{tempuser.roles.roles}}.
+                <br>
+                Here is your username and password. Do not share the password wth anyone else.
+                <br>
+                username - <b>{{tempuser.email}}</b>
+                <br>
+                password - <b>{{pwd}}</b>
+                Thank you for registering with CAPS (Centre for Academic and Professional Support), CHRIST (Deemed to be University). We have received your registration and look forward to a mutually beneficial association. 
+                <br>
+                If you have any queries or need additional help, please visit www.caps.com.
+
+                Thanks and regards,
+                Team CAPS
+                Centre for Academic and Professional Support
+                CHRIST (Deemed to be University)
+
+
+            </p>
+        </div>
+
+        <div class="footer">
+            
+            <h4>Christ(Deemed to be University)</h4>
+        </div>
+
+    </div>
+</body>
+</html>

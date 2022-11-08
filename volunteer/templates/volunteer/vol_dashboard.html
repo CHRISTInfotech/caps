@@ -1,0 +1,163 @@
+{% extends 'volunteer/vol_base.html' %}
+{% load static %}
+
+{% block style%}
+<style>
+.card {
+    overflow: hidden;
+  }
+  
+  .card-block .rotate {
+    z-index: 8;
+    float: right;
+    height: 100%;
+  }
+  
+  .card-block .rotate i {
+    color: rgba(20, 20, 20, 0.15);
+    position: absolute;
+    left: 0;
+    left: auto;
+    right: -10px;
+    bottom: 0;
+    display: block;
+    -webkit-transform: rotate(-44deg);
+    -moz-transform: rotate(-44deg);
+    -o-transform: rotate(-44deg);
+    -ms-transform: rotate(-44deg);
+    transform: rotate(-44deg);
+  }
+</style>
+{% endblock style %}
+
+{% block content%}
+
+{% if request.user.stuhead_vol_profiletbl.wing == 'group'%}
+<div class="container list p-3">
+  <div class="row ">
+
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_group_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-question fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Assigned Requests</h6>
+          <h1 class="display-1">{{asglist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_group_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-user-check fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Total Accepted Requests</h6>
+          <h1 class="display-1">{{acclist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_group_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-thumbs-up fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Total work-in-progress Requests</h6>
+          <h1 class="display-1">{{worklist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_group_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-thumbs-up fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Total Completed Requests</h6>
+          <h1 class="display-1">{{closedlist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{% elif request.user.stuhead_vol_profiletbl.wing == 'One-to-One'%}
+<div class="container list p-3">
+  <div class="row ">
+
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_oto_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-question fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Assigned Requests</h6>
+          <h1 class="display-1">{{asglist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_oto_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-user-check fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Total Accepted Requests</h6>
+          <h1 class="display-1">{{acclist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_oto_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-thumbs-up fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Total work-in-progress Requests</h6>
+          <h1 class="display-1">{{worklist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+
+    <div class="col-xl-4 col-lg-6">
+      <div class="card card-inverse card formdiv">
+        <a href="{% url 'vol_oto_list_url' %}">
+        <div class="card-block bg">
+          <div class="rotate">
+            <i class="fas fa-thumbs-up fa-7x"></i>
+          </div>
+          <h6 class="text-uppercase">Total Completed Requests</h6>
+          <h1 class="display-1">{{closedlist}}</h1>
+        </div>
+      </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endif %}
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

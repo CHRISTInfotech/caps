@@ -1,0 +1,11 @@
+{% autoescape off %}
+Hello,
+
+Thankyou for using CAPS session booking. Please Give your valuable feedback here!
+
+{{ protocol }}://{{ domain }}{% url 'oto_s_feedback_url' uidb64=uid  %}
+
+Sincerely,
+CAPS
+
+{% endautoescape %}

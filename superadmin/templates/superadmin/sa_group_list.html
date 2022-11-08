@@ -1,0 +1,393 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+<!-- Messages
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endfor %}
+{% endif %} -->
+		
+
+<div class="container list p-3">
+
+    <!-- Group Request List -->
+    <div class="row formdiv my-4">
+        
+        {% if reqlist %}
+        <h5 class="form-header">Group session request List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in reqlist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                
+                <td><a href="{% url 'sa_grp_detail_url' each.id %}">Info</a></td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no requests currently</h5>
+        {% endif %}
+        </div>
+   
+
+
+    
+    <!-- group assigned List -->
+    <div class="row formdiv my-4">
+        
+        {% if asglist %}
+        <h5 class="form-header">Group session assigned List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Assigned By</th>
+                <th>Assigned to</th>
+                <th>Info</th>
+       
+            </tr>
+            <tbody>
+            {% for each in asglist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td><small>{{each.assigned_by}}</small></td>
+                <td>{%for x in each.assigned_to.all %}{{x}}<br>{%endfor%} </td>
+                <td><a href="{% url 'sa_grp_detail_url' each.id %}">Info</a></td>
+    
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no assigned sessions currently</h5>
+        {% endif %}
+        </div>
+    
+    <!-- group half accepted list -->
+    <div class="row formdiv my-4">
+        
+        {% if halfasglist %}
+        <h5 class="form-header">Group session half accepted List (3 volunteers have to accept it)</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>accepted by</th>
+                <th>Status</th>
+                <th>Accepted count</th>
+                <th>Info</th>
+            
+            </tr>
+            <tbody>
+            {% for each in halfasglist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{% for a in each.accepted_by.all %} <small>{{a}}</small> {% endfor %}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{{each.accepted_count}}</td>
+                <td><a href="{% url 'sa_grp_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no half accepted sessions</h5>
+        {% endif %}
+        </div>
+
+    <!-- group accepted list -->
+    <div class="row formdiv my-4">
+        
+        {% if acclist %}
+        <h5 class="form-header">Group session accepted List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Accepted By</th>
+                <th>Info</th>
+            
+            </tr>
+            <tbody>
+            {% for each in acclist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{% for x in each.accepted_by.all %} <small>{{x}}</small>{% endfor %}</td>
+                <td><a href="{% url 'sa_grp_detail_url' each.id %}">Info</a></td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no accepted sessions</h5>
+        {% endif %}
+        </div>
+
+     <!-- group reject list -->
+    <div class="row formdiv my-4">
+        
+        {% if rejectlist %}
+        <h5 class="form-header">Group session work in Rejected List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                
+                <th>Rejected by</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in rejectlist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{% for x in each.rejected_by.all %} <small>{{x}}</small>{% endfor %}</td>
+
+                <td><a href="{% url 'sa_grp_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no rejected list</h5>
+        {% endif %}
+        </div> 
+
+    <!-- group workin progress list -->
+    <div class="row formdiv my-4">
+        
+        {% if worklist %}
+        <h5 class="form-header">Group session work in progress List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Info</th>
+               
+            </tr>
+            <tbody>
+            {% for each in worklist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td><a href="{% url 'sa_grp_detail_url' each.id %}">Info</a></td>
+              
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no work in progress</h5>
+        {% endif %}
+        </div>
+
+    <!-- oto closed list -->
+    <div class="row formdiv my-4">
+        
+        {% if closedlist %}
+        <h5 class="form-header">Group session closed List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Hours</th>
+                <th>Info</th>
+                
+            </tr>
+            <tbody>
+            {% for each in closedlist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{{each.hours}} hours</td>
+                <td><a href="{% url 'vol_grp_detail_url' each.id %}">Info</a></td>
+
+               
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+        {% else %}
+        <h5>Oops! There seems to be no sessions closed</h5>
+        {% endif %}
+        </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+                
+{% endblock %}

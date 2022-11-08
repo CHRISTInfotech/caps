@@ -1,0 +1,178 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<!-- alert for requests that are more than 24 hours -->
+{% if result %}
+<div class="container my-md-5">
+  <div class="alert alert-danger">
+      <h5>Alert!
+        <br>
+        There are <b>{{result.oto}}</b>  One-to-one session and <b>{{result.grp}}</b> Group session requests that are unattended, which were requested more than 24 hours ago.!
+      </h5>
+  </div>
+  </div>
+{% endif%}
+
+<!-- content of superadmin dashboard -->
+<div class="container my-md-5">
+    <div class="header">
+        <h5> One-to-One session booking counts</h5>
+        <hr>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4 p-1">  
+        <div class="col">
+          <a href="{% url 'mentor_oto_list_url' %}">
+          <div class="card formdiv">
+            <div class="card-body">
+              <h5 class="card-title text-center ">Total Requests</h5>
+              <h1 class="card-text text-center">{{oto_requestcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_oto_list_url' %}">
+          <div class="card formdiv">           
+            <div class="card-body">
+                <h5 class="card-title text-center ">Assigned sessions</h5>
+                <h1 class="card-text text-center">{{oto_assignedcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_oto_list_url' %}">
+          <div class="card formdiv">           
+            <div class="card-body">
+                <h5 class="card-title text-center ">Accepted sessions</h5>
+                <h1 class="card-text text-center">{{ oto_acceptedcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_oto_list_url' %}">
+          <div class="card formdiv">           
+            <div class="card-body">
+                <h5 class="card-title text-center ">Rejected sessions</h5>
+                <h1 class="card-text text-center">{{ oto_rejectedcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_oto_list_url' %}">
+          <div class="card formdiv">
+            <div class="card-body">
+                <h5 class="card-title text-center ">Work in progress</h5>
+                <h1 class="card-text text-center">{{oto_workcount}}</h1>
+             </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_oto_list_url' %}">
+            <div class="card formdiv">
+              <div class="card-body">
+                  <h5 class="card-title text-center ">Closed sessions</h5>
+                  <h1 class="card-text text-center">{{oto_closedcount}}</h1>
+              </div>
+            </div>
+          </a>
+        </div>
+
+      </div>
+</div>
+
+<!-- Group session counts -->
+<div class="container my-md-5">
+    <div class="header">
+        <h5> Group session booking counts</h5>
+        <hr>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-4 g-4 p-1">  
+        <div class="col">
+          <a href="{% url 'mentor_group_list_url' %}">
+          <div class="card formdiv">
+            <div class="card-body">
+              <h5 class="card-title text-center ">Total Requests</h5>
+              <h1 class="card-text text-center">{{group_requestcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_group_list_url' %}"> 
+          <div class="card formdiv">          
+            <div class="card-body">
+                <h5 class="card-title text-center ">Assigned sessions</h5>
+                <h1 class="card-text text-center">{{group_assignedcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_group_list_url' %}"> 
+          <div class="card formdiv">
+           
+            <div class="card-body">
+                <h5 class="card-title text-center ">Accepted sessions</h5>
+                <h1 class="card-text text-center">{{group_acceptedcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_group_list_url' %}"> 
+          <div class="card formdiv">
+           
+            <div class="card-body">
+                <h5 class="card-title text-center ">Rejected sessions</h5>
+                <h1 class="card-text text-center">{{group_rejectedcount}}</h1>
+            </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_group_list_url' %}"> 
+          <div class="card formdiv">
+            <div class="card-body">
+                <h5 class="card-title text-center ">Work in progress</h5>
+                <h1 class="card-text text-center">{{group_workcount}}</h1>
+             </div>
+          </div>
+        </a>
+        </div>
+
+        <div class="col">
+          <a href="{% url 'mentor_group_list_url' %}">
+            <div class="card formdiv">
+              <div class="card-body">
+                  <h5 class="card-title text-center ">Closed sessions</h5>
+                  <h1 class="card-text text-center">{{group_closedcount}}</h1>
+               </div>
+            </div>
+          </a>
+          </div>
+
+      </div>
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

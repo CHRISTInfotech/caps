@@ -1,0 +1,64 @@
+{% extends 'accounts/allbase.html' %}
+{% load static %}
+
+{% block content%}<h1 class="text-center">Feedback {{p.id}}  </h1>
+<br/>
+<div class="container text-center">
+<form action="{% url 'feedback' %}" method="GET" value="{{request.GET.q}} & {{request.GET.f}}  ">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-4"><input class="form-control" type="text" name="q"  value="{{request.GET.q}}" placeholder="email"/></div>
+        <div class="col-4"><input class="form-control" type="text" name="f" value="{{request.GET.f}}" placeholder="ticket no"/></div>
+        <div class="col-2 p"><input  class="btn btn-primary form-control" type="submit" name="done" value="SEND OTP"/></div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-4">  
+            {% if submitbutton == 'Search' or request.GET.q != ''  or request.GET.f != ''   %}
+            {% if results %}
+             
+            <div class="col p-3">
+            <label>OTP : </label> 
+            <input type="text" name="g" value="{{request.GET.g}}" placeholder="OTP">    
+            <input class="btn btn-primary form-control"  type="submit" name="done2" value="verify otp"/></div>
+            
+            {% if p.id %}
+            
+            {% for results in results %}
+            <br/><br/>
+            <div class="row">
+                <label>enter feedback and press submit</label>
+   
+                <div class="col"><textarea type="textarea" name="feedback"  value="{{results.s_feedback}}" placeholder="FEEDBACK"></textarea></div>
+                <div class="col-1"><input type = 'submit' class="btn btn-primary form-control"  name="done3" value="SUBMIT FEEDBACK"></div>
+                <div class="col"></div>
+            </div>
+            
+            
+            
+           
+            
+            {% endfor %}
+            
+            {% else  %}
+            
+            
+            {% endif %}
+            {% else %}
+            No search results for this query
+            {% endif %}
+            {% endif %}
+            </div>
+        <div class="col-4"></div>
+    </div>
+     
+    
+    
+    </form>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}

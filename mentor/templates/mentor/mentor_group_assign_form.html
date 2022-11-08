@@ -1,0 +1,108 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+
+{% block style%}
+<style>
+    .mybtn {
+        background-color: rgb(129, 255, 127);
+        border: none;
+        width:40%;
+        border-radius: 1rem;
+        height: 2.6rem;
+        transition: .3s;
+    }
+
+    .mybtn:hover {
+        background-color: rgb(40, 105, 39);
+        color: aliceblue;
+    }
+</style>
+{% endblock style %}
+
+{% block content%}
+ <!-- form  -->
+ <div class="container p-3">
+    <div class="row d-flex formdiv">
+        <div class="col">
+            <h4 class="pb-3">Group session volunteer assign</h4>
+
+            <!-- Messages -->
+            {% if messages %}
+            <div class="card card-body">
+            {% for message in messages %}
+            <p{% if message.tags == "success" %} class="alert alert-success "{% endif %}>{{ message }}</p>
+            {% if message == 'danger' %}
+            <p{% if message.tags == 'danger'  %} class="alert alert-danger"{% endif %}>{{ message }}</p>
+            {% endif %}
+            {% endfor %}
+            {% endif %}
+           
+            {% if form1.errors or form2.errors %}
+            <div class="alert alert-danger alert-dismissable">
+              <p>{{form1.errors}}</p>
+              <p>{{form2.errors}}</p>
+            </div>
+            {% endif %}
+            
+            <form action="" method="POST">
+                {% csrf_token %}
+            
+                
+            
+                {% if userlist %}
+                <label for="id_vol1">volunteer1</label>
+                <select name="vol1" id="id_vol1" class="form-control" initial>
+                    <option value="" selected disabled hidden>Choose here</option>
+                    {% for each in userlist %}
+                    <option value="{{ each.id }}">{{ each.email }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            
+                {% if userlist %}
+                <label for="id_vol2">volunteer2</label>
+                <select name="vol2" id="id_vol2" class="form-control" initial>
+                    <option value="" selected disabled hidden>Choose here</option>
+                    {% for each in userlist %}
+                    <option value="{{ each.id }}">{{ each.email }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            
+                {% if userlist %}
+                <label for="id_vol3">volunteer3</label>
+                <select name="vol3" id="id_vol3" class="form-control" initial>
+                    <option value="" selected disabled hidden>Choose here</option>
+                    {% for each in userlist %}
+                    <option value="{{ each.id }}">{{ each.email }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            
+                {% if userlist %}
+                <label for="id_vol4">volunteer4</label>
+                <select name="vol4" id="id_vol4" class="form-control" initial>
+                    <option value="" selected disabled hidden>Choose here</option>
+                    {% for each in userlist %}
+                    <option value="{{ each.id }}">{{ each.email }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
+            
+                <button class="my-3 mybtn" type="submit">Assign </button>
+               
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+{% endblock content %}
+
+{% block script%}
+{% endblock script %}
+
+
+

@@ -1,0 +1,265 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<!-- Volunteer List -->
+<form action="{% url 'userreports' %}" method="GET" value="{{request.GET.q}} | {{request.GET.f}} |  {{request.GET.g}} |  {{request.GET.h}}">
+	
+	
+	<div class="row p-5">
+		<div class="col"></div>
+		<div class="col"><input id="textType" type="text" name="q" value="{{request.GET.q}}"  placeholder="Search" class="form-control text-center "/></div>
+		<div class="col"></div>
+	</div>
+	<!--end of row-->
+<div>
+	<div class="row p-1">
+		<div class="col p-1"></div>
+		<div class="col p-1"><label> Select Roles </label>  
+			<select name="f" class="form-control text-center" > 
+				<option value = "">   
+					<p>---</p>
+				</option>
+				{% for roles in roles%} 
+			<option value = "{{roles.id}}">   
+				<p>{{roles.roles}}</p>
+			</option>  
+			{% endfor %}
+			</select>
+			
+	</div>
+	<div class="col p-1"><label> STATUS </label>  
+			<select name="g" class="form-control text-center"> 
+				<option value = "">   
+					<p>---</p>
+				</option>	
+			<option value = "True">   
+				<p>active{{2.is_active}}</p>
+			</option>
+			<option value = "False">   
+				<p>inactive</p>
+			</option>   
+		
+			</select>
+		</div>
+		<div class="col"><label> Campus </label>  
+			<select name="h" class="form-control text-center" > 
+				<option value = "">   
+					<p>---</p>
+				</option>
+				{% for campus in campus%} 
+			<option value = "{{campus.id}}">   
+				<p>{{campus.campus}}</p>
+			</option>  
+			{% endfor %}
+			</select></div>
+		<div class="col"></div>
+	</div>
+
+		
+	
+	</div>
+	<!--end of row-->
+	<div class="row">
+		<div class="col-2"></div>
+		<div class="col-2"></div>
+		<div class="col-1"></div>
+		<div class="col-2">
+			<button type="submit" class="btn btn-primary" name="done" value="Search">SUBMIT</button>
+		</div>
+			<div class="col-1"></div>
+			<div class="col-1"></div>
+		<div class="col-2"></div>
+		<div class="col-2"></div>
+		</div>
+		<!--end of row-->
+</form>
+<form  method="post">
+{% if submitbutton == 'Search' and request.GET.q != ''  or request.GET.f != '' or request.GET.g != ''  %}
+{% if results%}
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header">User Reports</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Slno </th>
+                <th>NAME</th>
+             
+                <th>email</th>
+            </tr>
+            
+
+            {% for result in results %}
+            {% csrf_token %}
+            <tr class="text-center">
+            <td>{{forloop.counter}}</td>
+            <td>{{result.first_name}} {{result.last_name}}</td>
+           
+            <td>{{result.email}}</td>
+            
+            </tr>
+            {% endfor %}
+            
+        </table>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<p >
+	<div class="wrapper text-center">
+        <h2>Oops! no results</h2>
+
+        <h4>We can't fint the results you're looking for</h4>
+		<h4>or</h4>
+		<h4>No such users found</h4>
+    </div></p>
+{% endif %}
+{% endif %}
+</form>
+
+<div id="content" class="pt-5 text-center">
+	<b><h1>Most Sessions (Active Users) </h1></b>
+		<div class="row mb-3">
+			{% for counting in maxuser %} 
+		{% for user in user %} 
+        {% if counting.accepted_by == user.id and user.is_active  %}
+            <div class="col-xl col-lg ">
+              <div class="card card-inverse card">
+                <div class="card-block bg">
+                  <div class="rotate">
+                    <i class="fas fa-user-alt"></i>
+                  </div>
+				  
+                  <h6 class="text-uppercase">{{user.email}}</h6>
+                  <h1 class="display-1">{{counting.accepted_by__count}}</h1>
+				  
+                </div>
+              </div>
+            </div>
+			{% endif %}
+			{% endfor %} 
+			{% endfor %} 
+		</div>
+		<div id="content" class="pt-5 text-center">
+			<b><h1>Most Sessions (All Time) </h1></b>
+				<div class="row mb-3">
+					{% for counting in maxuser %} 
+				{% for user in user %} 
+				{% if counting.accepted_by == user.id %}
+					<div class="col-xl col-lg ">
+					  <div class="card card-inverse card">
+						<div class="card-block bg">
+						  <div class="rotate">
+							<i class="fas fa-user-alt"></i>
+						  </div>
+						  
+						  <h6 class="text-uppercase">{{user.email}} </h6>
+						  <h6 class="text-uppercase">status : {{user.is_active}}</h6>
+						  <h1 class="display-1">{{counting.accepted_by__count}}</h1>
+						  
+						</div>
+					  </div>
+					</div>
+					{% endif %}
+					{% endfor %} 
+					{% endfor %} 
+				</div>
+				<div class="row" >
+					<h1>Total reports</h1>
+				<div class="col-4" id="">
+					<div class="container">
+						<b class="form-control  p-2">Total Roles & User(Active) </b>
+						<div class="header p-2">
+							
+						  
+						</div>
+						{% for counting in rolescount %} 
+							{% for roles in roles %} 
+							{% if counting.roles == roles.id and counting.is_active%}
+						<ul>
+							<div class="row" style="border:100%">
+								<div class="col">{{roles.roles}} </div>
+								<div class="col"> {{counting.roles__count}}</div>
+							</div>
+						  
+						</ul>
+						{% endif %}
+						{% endfor %} 
+						{% endfor %} 	
+					  </div>
+					  <div class="container">
+						<b class="form-control  p-2">Total Roles & User(All Time) </b>
+						<div class="header p-2">
+							
+						  
+						</div>
+						{% for counting in rolescount2 %} 
+							{% for roles in roles %} 
+							{% if counting.roles == roles.id %}
+						<ul>
+							<div class="row" style="border:100%">
+								<div class="col">{{roles.roles}} </div>
+								<div class="col"> {{counting.roles__count}}</div>
+							</div>
+						  
+						</ul>
+						{% endif %}
+						{% endfor %} 
+						{% endfor %} 	
+					  </div>
+					  
+						 
+				</div>
+				<div class="col-4" id="">
+					<div class="container">
+						<b class="form-control  p-2">Total Campus </b>
+						<div class="header p-2">
+						</div>
+						{% for counting in campuscount %} 
+							{% for campus in campus %} 
+							{% if counting.id == campus.id %}
+						<ul>
+							<div class="row" style="border:100%">
+								<div class="col">{{campus.campus}} </div>
+							</div>
+						  
+						</ul>
+						{% endif %}
+						{% endfor %} 
+						{% endfor %} 	
+					  </div>
+					 
+				</div>
+				<div class="col-4" id="">
+					<div class="container">
+						<b class="form-contro-
+						
+						
+						
+						
+						
+						
+						
+						l  p-2">Total department and courses </b>
+						<div class="header p-2">
+						</div>
+						
+						<ul>
+							<div class="row" style="border:100%">
+								<div >Total courses : {{coursetot}} </div>
+								<div >Total departments : {{depttot}} </div>
+							</div>
+						  
+						</ul>
+							
+					  </div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+

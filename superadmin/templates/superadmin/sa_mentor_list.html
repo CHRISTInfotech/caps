@@ -1,0 +1,67 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<!-- Messages -->
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endfor %}
+{% endif %}
+<!-- mentor List -->
+<div class="container list p-3">
+    <div class="row formdiv">
+        {% if templist %}
+        <h4 class="form-header">Mentor List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                                <th>Sl No</th>
+                                <th>Mentor name</th>
+                                <th>Campus</th>
+                                <th>Mobile</th>
+                                <th>Email</th>
+                                <th>Actions</th>
+                              </tr>
+                            <tbody>
+                            {% for each in templist %}
+                              <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{each.first_name}} {{each.lastname}}</td>
+                                <td>{{each.campus}}</td>
+                                <td>{{each.mobile}}</td>
+                                <td>{{each.email}}</td>
+                                
+                                <td>
+                                  {% if each.is_active %}
+                                  <a class="btn btn-danger" href="{% url 'set_user_inactive_mentor_url' each.id %}">Make inactive</a>
+                                  {% else %}
+                                  <a class="btn btn-success" href="{% url 'set_user_active_mentor_url' each.id %}">Make active</a>
+                                  {% endif %}
+                                  <a class="btn btn-primary" href="{% url 'sa_mentor_update_url' each.id %}">Update</a></td>
+                              </tr>
+                            {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+
+                        {% else %}
+                        <h5>Oops! There seems to no mentors currently</h5>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                
+{% endblock %}
+
+{% block script %}
+{% endblock %}

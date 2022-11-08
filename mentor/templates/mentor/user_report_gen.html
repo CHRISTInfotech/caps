@@ -1,0 +1,316 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+
+{% block style%}
+<style>
+    .headerdiv{
+		background-color: rgb(239, 197, 91);
+		padding: .4rem;
+		border-radius: .4rem;
+		text-align: center;
+	}
+	.formdiv{
+		padding-top: .2rem;
+		
+	}
+    .form-control1{
+        background-color: aliceblue;
+        padding: .6rem;
+        border-radius: .4rem;
+    }
+
+    .special1{
+        background-color: rgb(160, 253, 174);
+    }
+
+    .special2{
+        background-color: rgb(253, 160, 160);
+    }
+
+	table {
+		overflow-x: scroll;
+		display: block;
+        max-height: 100vh;
+		/* height: 400px; */
+	}
+</style>
+{% endblock style%}
+
+{% block content%}
+<!-- form  -->
+<div class="container p-3">
+    <div class="row d-flex formdiv">
+        <h4 class="pb-3 headerdiv">User stats</h4>
+        <div class="col">
+            <form>
+    
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                      <label for="id_firstname">Name</label>
+                      <h6 class="form-control1">{{tempvol.user.get_full_name}}</h6>
+                    </div>
+                    <div class="form-group col-md-5">
+                      <label for="id_lastname">Email</label>
+                      <h6 class="form-control1">{{tempvol.user.email}}</h6>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label for="id_firstname">Register number</label>
+                        <h6 class="form-control1">{{tempvol.regno}}</h6>
+                      </div>
+                   
+                    <div class="form-group col-md-2">
+                        <label for="id_lastname">is Active?</label>
+                        {% if tempvol.user.is_active %}
+                            <h6 class="form-control1 special1">{{tempvol.user.is_active}}</h6>
+                        {% else %}
+                            <h6 class="form-control1">{{tempvol.user.is_active}}</h6>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Mobile</label>
+                        <h6 class="form-control1">{{tempvol.user.mobile}}</h6>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Semester Class and section</label>
+                        <h6 class="form-control1">{{tempvol.class_sec}}</h6>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Course</label>
+                        <h6 class="form-control1">{{tempvol.course}}</h6>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Campus</label>
+                        <h6 class="form-control1">{{tempvol.user.campus}}</h6>
+                    </div>
+                    
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="id_lastname">Role</label>
+                        <h6 class="form-control1">{{tempvol.user.roles.roles}}</h6>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Current wing</label>
+                        <h6 class="form-control1">{{tempvol.wing}}</h6>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Total sessions conducted</label>
+                        <h6 class="form-control1">{{tempvol.no_of_sessions_conducted}}</h6>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="id_firstname">Total hours conducted</label>
+                        <h6 class="form-control1">{{tempvol.total_session_hrs}}</h6>
+                    </div>
+                    
+                </div>
+              </form>   
+        </div>
+    </div>
+
+    <!-- Oto accepted List -->
+    <div class="row formdiv my-4">
+        
+      {% if otoacclist %}
+      <h5 class="form-header">One-to-One accepted sessions by {{tempvol.user.get_full_name}}</h4>
+
+      <div class="table-responsive">
+      <table class="table  table-hover">
+          <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+              <th>Sl No</th>
+              <th>Session name</th>
+              <th>Name</th>
+              <th>Requested date</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>course</th>
+              <th>Status</th>
+              <th>Info</th>
+          </tr>
+          <tbody>
+          {% for each in otoacclist %}
+          <tr class="text-center rounded-1 tablelist">
+              <td>{{forloop.counter}}</td>
+              {% if each.other %}
+              <td>{{each.other_desc}}
+              <p style="color:green;">New Session</p></td>
+              {% else %}
+              <td>{{each.session}}</td>
+              {% endif %}
+              
+              <td>{{each.name}}</td>
+              <td>{{each.request_datetime}}</td>
+              <td><small>{{each.stuemail}}</small></td>
+              <td>{{each.mobile}}</td>
+              <td>{{each.course}}</td>
+              <td>{{each.ticket_status}}</td>
+              <td><a href="{% url 'mentor_oto_detail_url' each.id %}">Info</a></td>                
+             
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+      </div>
+     
+        {% else %}
+        <h5>Oops! There seems to be no one to one sessions accepted by {{tempvol.user.get_full_name}}</h5>
+        {% endif %}
+    </div>
+
+    <!-- Oto assigned List -->
+    <div class="row formdiv my-4">
+        
+        {% if otoasglist %}
+        <h5 class="form-header">One-to-One assigned sessions by {{tempvol.user.get_full_name}}</h4>
+  
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Name</th>
+                <th>Requested date</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in otoasglist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                
+                <td>{{each.name}}</td>
+                <td>{{each.request_datetime}}</td>
+                <td><small>{{each.stuemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td><a href="{% url 'mentor_oto_detail_url' each.id %}">Info</a></td>                
+               
+            </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+       
+          {% else %}
+          <h5>Oops! There seems to be no one-to-one sessions assigned by {{tempvol.user.get_full_name}}</h5>
+          {% endif %}
+        </div>
+
+    <!-- groupaccepted list -->
+    <div class="row formdiv my-4">
+        
+        {% if grpacclist %}
+        <h5 class="form-header">Group session accepted by {{tempvol.user.get_full_name}}</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>accepted by</th>
+                <th>Status</th>
+                <th>Accepted count</th>
+                <th>Info</th>
+            
+            </tr>
+            <tbody>
+            {% for each in grpacclist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{% for a in each.accepted_by.all %} <small>{{a}}</small> {% endfor %}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{{each.accepted_count}}</td>
+                <td><a href="{% url 'vol_grp_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+            {% else %}
+            <h5>Oops! There seems to be no group sessions accepted sessions by {{tempvol.user.get_full_name}}</h5>
+            {% endif %}
+    </div>
+     
+    <!-- groupassigned list -->
+    <div class="row formdiv my-4">
+        
+        {% if grpasglist %}
+        <h5 class="form-header">Group session assigned by {{tempvol.user.get_full_name}}</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Request date</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>accepted by</th>
+                <th>Status</th>
+                <th>Accepted count</th>
+                <th>Info</th>
+            
+            </tr>
+            <tbody>
+            {% for each in grpasglist %}
+            <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <p style="color:green;">New Session</p></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                <td>{{each.request_datetime}}</td>
+                <td>{{each.name}}</td>
+                <td><small>{{each.facultyemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{% for a in each.accepted_by.all %} <small>{{a}}</small> {% endfor %}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{{each.accepted_count}}</td>
+                <td><a href="{% url 'vol_grp_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+            {% else %}
+            <h5>Oops! There seems to be no group sessions accepted sessions by {{tempvol.user.get_full_name}}</h5>
+            {% endif %}
+    </div>
+ 
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

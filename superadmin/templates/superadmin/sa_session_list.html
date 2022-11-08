@@ -1,0 +1,50 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+
+<!-- mentor List -->
+<div class="container list p-3">
+    <div class="row formdiv">
+        {% if templist %}
+        <h4 class="form-header">Session List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session</th>
+                <th>Description</th>
+                <th>Session Pic Path</th>
+                <th>Uploaded date</th>
+                <th>Actions</th>
+            </tr>
+            <tbody>
+            {% for each in templist %}
+                <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{each.session}}</td>
+                <td>{{each.description}}</td>
+                <td>{% if session_pic.url %} {{each.session_pic.url}} {% else %} Image path not found {% endif %}</td>
+                <td>{{each.uploaded_date}}</td>
+                <td>
+                    <a class="btn btn-danger m-1" href="{% url 'sa_session_delete_url' each.id %}">Delete</a>
+                    <a class="btn btn-primary m-1" href="{% url 'sa_session_update_url' each.id %}">Update</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+
+        {% else %}
+        <h5>Oops! There seems to no Sessions currently</h5>
+        {% endif %}
+        </div>
+    </div>
+</div>
+                
+{% endblock %}
+
+{% block script %}
+{% endblock %}

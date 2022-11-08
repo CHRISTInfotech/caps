@@ -1,0 +1,180 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<!-- Volunteer List -->
+<form action="{% url 'sessions' %}" method="GET" >
+	
+	
+	
+</form>
+<form  method="post">
+
+    <div class="col"><input type="button" class="btn btn-primary" id="btnExport" value="Export" onclick="ExportToExcel('xlsx')" /></div>
+
+{% if results2 %}
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header text-center">Closed and No Student feedback </h4>
+   
+        <p class="p-2">total counts : {{results2count}}</p>
+        <div class="table-responsive">
+        <table class="table  table-hover" id="tbl_exporttable_to_xls">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Slno </th>
+				<th>Student Name</th>
+                <th>Ticket No</th>
+                <th>session</th>
+                <th>Faculty email</th>
+                <th>Volunteer email</th>
+				<th>Faculty feedback</th>
+				<th>volunteer feedback</th>
+				<th>Accepted date</th>
+				<th>requested date</th>
+            </tr>
+           
+            {% for result in results2 %}
+            
+            <tr class="text-center">
+            <td>{{forloop.counter}}</td>
+			<td>{{result.name}} </td>
+            <td>{{result.ticket_no}}</td>
+            <td>{% for session in session %}
+                {% if session.id == result.session_id %}
+                {{session.session}}
+                {% endif %}
+                {% endfor %}
+            </td>
+
+            <td>{{result.facultyemail}}</td>
+            <td>
+                {% for x in result.accepted_by.all %}
+                {{ x }}
+                {% endfor %}
+            </td>
+			<td>{{result.s_feedback}}</td>
+			<td>{{result.v_feedback}}</td>
+			<td>{{result.accepted_date}}</td>
+			<td>{{result.request_datetime}}</td>
+            </tr>
+            
+            {% endfor %}
+        </table>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header text-center">Closed and No feedback</h4>
+        
+        <div class="table-responsive">
+        <table class="table  table-hover">
+			<p >
+
+				<div class="wrapper text-center">
+					<h2>Oops! no results</h2>
+			
+					<h4>We can't fint the results you're looking for</h4>
+					<h4>or</h4>
+					<h4>No such users found</h4>
+				</div></p>
+        </table>
+        </div>
+    </div>
+</div>
+{% endif %}
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script type="text/javascript">
+       function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('tbl_exporttable_to_xls');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+         XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+    }
+    </script>
+{% if result %}
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header text-center">Closed and feedback</h4>
+        <p class="p-2">total counts : {{resultcount}}</p>
+        <div class="table-responsive">
+            <table class="table  table-hover">
+                <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                    <th>Slno </th>
+                    <th>Student Name</th>
+                    <th>Ticket No</th>
+                    <th>session</th>
+                    <th>Faculty email</th>
+                    <th>Volunteer email</th>
+                    <th>Faculty feedback</th>
+                    <th>volunteer feedback</th>
+                    <th>Accepted date</th>
+                    <th>requested date</th>
+                </tr>
+               
+                {% for result in result %}
+                
+                <tr class="text-center">
+                <td>{{forloop.counter}}</td>
+                <td>{{result.name}} </td>
+                <td>{{result.ticket_no}}</td>
+                <td>{% for session in session %}
+                    {% if session.id == result.session_id %}
+                    {{session.session}}
+                    {% endif %}
+                    {% endfor %}
+                </td>
+    
+                <td>{{result.facultyemail}}</td>
+                <td>
+                    {% for x in result.accepted_by.all %}
+                    {{ x }}
+                    {% endfor %}
+                    
+                </td>
+                <td>{{result.s_feedback}}</td>
+                <td>{{result.v_feedback}}</td>
+                <td>{{result.accepted_date}}</td>
+                <td>{{result.request_datetime}}</td>
+                </tr>
+                
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+
+{% else %}
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header text-center">Closed and feedback</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+			<p >
+
+				<div class="wrapper text-center">
+					<h2>Oops! no results</h2>
+			
+					<h4>We can't fint the results you're looking for</h4>
+					<h4>or</h4>
+					<h4>No such users found</h4>
+				</div></p>
+        </table>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+
+</form>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+

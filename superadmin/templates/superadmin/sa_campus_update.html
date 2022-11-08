@@ -1,0 +1,28 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container">
+	
+	<div class="row formdiv">
+		<h4>update campus details</h4>
+		<div class="col">
+			<form action="" method="POST">
+				{% csrf_token %}
+				{{form|crispy}}
+				<div class="row p-3">
+					<div class="col-4"></div>
+					<div class="col-4">
+					<button class="btn btn-primary" name="create" id="create" type="submit" onclick="return confirm('Are you sure to update the Campus name?')">Submit</button>	
+					</div>
+					<div class="col-4"></div>
+				</div>
+			</form>
+			
+		</div>			
+	</div>
+
+<div class="col-4"></div>
+</div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CAPS dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Bootsrap 5 CDN for CSS framework-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+    {% block style%}
+    {% endblock style %}
+    <style>
+        #sidebar{
+                background-color: rgb(248, 173, 33);
+                background-color: goldenrod;
+        }
+    </style>
+
+    
+  
+
+  </head>
+
+  <body>
+        
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                <h1><img class="img-fluid" src="{% static 'assets/img/Capslogo-own.png' %}" alt=""></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="{% url 'mentor_dashboard_url' %}">Dashboard</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_volunteer_list_url' %}">Volunteer list</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_volunteer_add_url' %}">Add Volunteer</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_sh_list_url' %}">Studentheads list</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_sh_add_url' %}">Add Studenthead</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_oto_list_url' %}">One-to-One sessions</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_group_list_url' %}">Group sessions</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_session_list_url' %}">Sessions list</a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'mentor_session_add_url' %}">Add Session</a>
+                    </li>
+
+                    <li >
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="{% url 'onetoonereports' %}">One-to-One reports</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'peertopeerreports' %}">Group reports</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'user_report_url' %}">User reports</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'oto_report_url' %}">One-to-one stats</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'grp_report_url' %}">Group session stats</a>
+                            </li>
+                            <!-- <li>
+                                <a href="{% url 'sessions' %}">Session reports</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'group_studentheadreports' %}">Group student head</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'group_volunteerreports' %}">Group Volunteer</a>
+                            </li> -->
+                            
+                        </ul>
+                    </li>
+
+                </ul>
+
+                <div class="mb-5">
+                    <div class="form-group">
+                        <a href="{% url 'logout_url' %}" class="btn btn-block p-2 logoutbtn">LOGOUT</a>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <p>CAPS @ christuniversity.in</p>
+                </div>
+
+            </div>
+        </nav>
+
+        
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-2 pt-2 ">
+            <!-- Header -->
+            <div class="container header-bar p-3">
+                <div class="d-md-flex  flex-sm-row align-items-center justify-content-between">
+                    <div class=""><img src="{% static 'images/capslogo1.png' %}" class="navbar-brand img-fluid pl-3" alt="" width="100px"></div>
+                    <div class=""><h4 style="margin:0;">Mentor</h4></div>
+                    <div class=""><h4><small>{{request.user.email}}</small></h4></div>
+                </div>
+            </div>
+
+            <!-- Messages -->
+            {% for message in messages %}
+            <div class="container-fluid p-3">
+            <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+                {{ message }}
+            </div>
+            </div>
+            {% endfor %}
+
+            {% block content %}
+            {% endblock %}
+            
+        </div>
+
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+    {% block script %}
+    {% endblock %}
+  </body>
+</html>

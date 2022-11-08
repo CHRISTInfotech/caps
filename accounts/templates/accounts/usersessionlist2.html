@@ -1,0 +1,27 @@
+{% extends 'accounts/allbase.html' %}
+{% load static %}
+
+{% block style %}
+{% endblock style %}
+
+{% block content %}
+<div class="container">
+    <div class="card-header my-3">
+        <h3 class="text-center">Sessions offered</h3>
+    </div>
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+    {% for each in temp %}
+        <div class="col">
+          <div class="card">
+            
+            <img {% if each.session_pic %} src="{{each.session_pic.url}}" {% endif %} class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">{{each.session}}</h5>
+              <p class="card-text">{{each.description}}</p>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock content %}

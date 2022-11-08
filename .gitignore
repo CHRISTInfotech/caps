@@ -1,0 +1,9 @@
+accounts/migrations/*
+accounts/__pycache__/*
+CAPS/__pycache__/*
+mentor/__pycache__/*
+mentor/migrations/*
+superadmin/__pycache__/*
+superadmin/migrations/__pycache__/*
+volunteer/__pycache__/*
+volunteer/migrations/__pycache__/*

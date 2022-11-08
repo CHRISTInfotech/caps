@@ -1,0 +1,142 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+
+
+{% block style %}
+<style>
+    .form-control1{
+        background-color: aliceblue;
+        padding: .6rem;
+        border-radius: .4rem;
+    }
+
+    .special{
+        background-color: rgb(160, 253, 174);
+    }
+</style>
+{% endblock style %}
+
+{% block content%}
+
+<!-- Messages
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endfor %}
+{% endif %} -->
+<!-- Volunteer List -->
+<div class="container list p-3">
+    <div class="row formdiv">
+        <form>
+            <legend class="text-center">Group Session details</legend>
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="id_firstname">Session name</label>
+                  <h6 class="form-control1">{{tempgrp.session}}</h6>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="id_lastname">Requested-date</label>
+                  <h6 class="form-control1">{{tempgrp.request_datetime}}</h6>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="id_firstname">Faculty Name</label>
+                  <h6 class="form-control1">{{tempgrp.name}}</h6>
+                </div>
+                
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="id_firstname">Email</label>
+                  <h6 class="form-control1">{{tempgrp.facultyemail}}</h6>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="id_lastname">Mobile</label>
+                  <h6 class="form-control1">{{tempgrp.mobile}}</h6>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="id_firstname">Course</label>
+                  <h6 class="form-control1">{{tempgrp.course}}</h6>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="id_lastname">Campus</label>
+                  <h6 class="form-control1">{{tempgrp.campus}}</h6>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="id_firstname">Ticket number</label>
+                  <h6 class="form-control1">{{tempgrp.ticket_no}}</h6>
+                </div>
+                <div class="form-group col-md-6">
+                  <label for="id_lastname">Ticket status</label>
+                  <h6 class="form-control1 special">{{tempgrp.ticket_status}}</h6>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="id_firstname">Assigned by</label>
+                    <h6 class="form-control1">{{tempgrp.assigned_by}}</h6>
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="id_lastname">Assigned to</label>
+                  <h6 class="form-control1">{% for x in tempgrp.assigned_to.all %} <small>{{x}} <br> </small>{% endfor %}</h6>
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="id_lastname">Accepted by</label>
+                  <h6 class="form-control1">{% for x in tempgrp.accepted_by.all %} <small>{{x}} <br> </small>{% endfor %}</h6>
+              </div>
+            </div>
+            <hr>
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                  <label for="id_firstname">Assigned Date</label>
+                  <h6 class="form-control1">{{tempoto.assigned_date}}</h6>
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="id_lastname">Accepted Date</label>
+                  <h6 class="form-control1">{{tempoto.accepted_date}}</h6>
+              </div>
+              <div class="form-group col-md-4">
+                  <label for="id_lastname">Closed Date</label>
+                  <h6 class="form-control1">{{tempoto.closed_date}}</h6>
+              </div>
+          </div>
+
+            <hr>
+            <div class="form-group col-md-12">
+                <label for="id_firstname">Volunteer feedback</label>
+                <h6 class="form-control1">{{tempgrp.v_feedback}}</h6>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label for="id_lastname">Student feedback</label>
+                <h6 class="form-control1">{{tempgrp.s_feedback}}</h6>
+            </div>
+
+          </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

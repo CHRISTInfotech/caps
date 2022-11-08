@@ -1,0 +1,98 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            background-color: aliceblue;
+            text-align: center;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .footer,.header{
+            background-color: rgb(156, 212, 247);
+            padding: 1.2rem;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 1fr ;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(156, 212, 247);
+            padding: 1.2rem;
+        }
+        .maincontent{
+            min-height: 30vh;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        h4{
+            margin: auto;
+        }
+        h4 img{
+            padding: 1.4rem;
+        }
+        a{
+            text-decoration: none;
+            padding: 1.2rem;
+            background-color: rgb(67, 179, 227);
+            border-radius: 1rem;
+            font-size: 1.2rem;
+            margin: 1rem;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+           
+            <div class="head-content">
+                <h2>CAPS Session Booking System</h2>
+            </div>
+            
+        </div>
+
+        <div class="maincontent">
+            <img src="" alt="">
+            <p>
+                Hello {{temp.name}}, 
+                <br>
+                Greetings from CAPS!
+                <br>
+                As per your registration for a training session titled
+                {% if temp.other %}{{temp.other}}{% else %}{{temp.session}}{% endif%}
+                with CAPS (Centre for Academic and Professional Support),
+                you are requested to contact your volunteer In Charge, whose contact details can be found alongside this mail. 
+
+                Volunteer In Charge: {{tempuser.user.first_name}}
+                Phone Number: {{tempuser.mobile}}
+                Email ID: {{tempuser.email}}
+
+                If you have any queries or need additional help, please visit www.caps.com.
+                <br>
+                <br>
+                Thanks and regards,
+                Team CAPS
+                Centre for Academic and Professional Support
+                CHRIST (Deemed to be University)
+
+
+            </p>
+        </div>
+
+        <div class="footer">
+            
+            <h4>Christ(Deemed to be University)</h4>
+        </div>
+
+    </div>
+</body>
+</html>

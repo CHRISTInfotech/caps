@@ -1,0 +1,82 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}	
+{% block content%}
+
+<!-- form  -->
+<div class="container p-3">
+    <div class="row d-flex formdiv">
+        <div class="col">
+            <h4 class="pb-3">Add new Session</h4>
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+
+                <!-- <div class="form-group">
+                    <label for="id_session">Session Name</label>
+                    {{form.session|as_crispy_field}}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_description">Description</label>
+                    {{form.description}}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_pic">Session Pic</label>
+                    {{form.session_pic}}
+                </div> -->
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input type="submit" class="btn btn-primary btn-block" value="Add new session" onclick="return confirm('Are you sure to add new Session?')">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="reset" class="btn btn-block btn-light">
+                    </div>                               
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row formdiv">
+            <h4 class="form-header">Session List</h4>
+    
+            <div class="table-responsive">
+            <table class="table  table-hover">
+                <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                    <th>Slno</th>
+                    <th>Session</th>
+                    <th>Description</th>
+                    <th>Session pic path</th>
+                    <th>Uploaded date</th>
+                    <th>Operations</th>
+                </tr>
+                
+    
+                {% for each in temp %}
+                <tr class="text-center">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{each.session}}</td>
+                    <td>{{each.description}}</td>
+                    <td>{{each.session_pic}}</td>
+                    <td>{{each.uploaded_date}}</td>
+                    <td>
+                        <a class="btn btn-danger m-1" href="{% url 'mentor_session_delete_url' each.id %}" onclick="return confirm('Are you sure to Delete the Session?')">Delete</a>
+                        <a class="btn btn-primary m-1" href="{% url 'mentor_session_update_url' each.id %}">Update</a></td>
+                    </tr>
+                </tr>
+                {% endfor %}
+                
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

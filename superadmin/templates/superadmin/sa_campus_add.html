@@ -1,0 +1,58 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+	
+<!-- Page Content  -->
+<div id="content" class="p-4 p-md-5 text-center">
+		
+	<div class="container">
+		<div class="row formdiv">
+			<h4>Add new campus</h4>
+
+			<form action=""  method="POST">
+				{% csrf_token %}
+				{% if form.errors %}
+					<div class="alert alert-danger">
+						{{form.errors}}
+					</div>
+				{% endif %}
+
+				{{form|crispy}}
+				<input type="submit" class=" btn btn-primary" onclick="return confirm('Are you sure to add new Campus?')">
+			</form>
+		</div>
+	</div>
+
+	<!-- campus List -->
+	<div class="container list p-3">
+		<div class="row formdiv">
+			<h4 class="form-header">Campus List</h4>
+
+			<div class="table-responsive">
+			<table class="table  table-hover">
+				<tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+					<th>Slno</th>
+					<th>Campus</th>
+					<th>Action</th>
+				</tr>
+
+				{% for each in templist %}
+				<tr class="text-center">
+					<td>{{forloop.counter}}</td>
+					<td>{{each.campus}}</td>
+					<td>
+						<a class="btn btn-danger m-1" href="{% url 'sa_campus_delete_url' each.id %}" onclick="return confirm('Are you sure to delete the Campus?')">Delete</a>
+						<a class="btn btn-primary m-1" href="{% url 'sa_campus_update_url' each.id %}">Update</a>
+					</td>
+				</tr>
+				{% endfor %}
+				
+			</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

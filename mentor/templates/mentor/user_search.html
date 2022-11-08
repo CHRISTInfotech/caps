@@ -1,0 +1,90 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block style%}
+<style>
+    .headerdiv{
+		background-color: rgb(239, 197, 91);
+		padding: .4rem;
+		border-radius: .4rem;
+		text-align: center;
+	}
+	.formdiv{
+		padding-top: .2rem;
+		
+	}
+	table {
+		overflow-x: scroll;
+		display: block;
+        max-height: 100vh;
+		/* height: 400px; */
+	}
+</style>
+{% endblock style%}
+
+{% block content%}
+<!-- form  -->
+<div class="container p-3">
+    <div class="row d-flex formdiv">
+        <h4 class="pb-3 headerdiv">User information</h4>
+        <div class="col">
+
+            
+        </div>
+    </div>
+
+    <!-- Oto Request List -->
+    <div class="row formdiv my-4">
+        
+      {% if tempoto %}
+      <h5 class="form-header">One-to-One session Reports</h4>
+
+      <div class="table-responsive">
+      <table class="table  table-hover">
+          <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+              <th>Sl No</th>
+              <th>Session name</th>
+              <th>Name</th>
+              <th>Requested date</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>course</th>
+              <th>Status</th>
+              <th>Info</th>
+          </tr>
+          <tbody>
+          {% for each in tempoto %}
+          <tr class="text-center rounded-1 tablelist">
+              <td>{{forloop.counter}}</td>
+              {% if each.other %}
+              <td>{{each.other_desc}}
+              <p style="color:green;">New Session</p></td>
+              {% else %}
+              <td>{{each.session}}</td>
+              {% endif %}
+              
+              <td>{{each.name}}</td>
+              <td>{{each.request_datetime}}</td>
+              <td><small>{{each.stuemail}}</small></td>
+              <td>{{each.mobile}}</td>
+              <td>{{each.course}}</td>
+              <td>{{each.ticket_status}}</td>
+              <td><a href="{% url 'mentor_oto_detail_url' each.id %}">Info</a></td>                
+             
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+      </div>
+     
+      {% else %}
+      <h5>Oops! There seems to be no requests currently</h5>
+      {% endif %}
+      </div>
+ 
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

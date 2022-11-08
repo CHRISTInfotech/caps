@@ -1,0 +1,228 @@
+{% extends 'volunteer/vol_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content%}
+
+<div class="container list p-3">
+
+    <!-- Oto assigned List -->
+    <div class="row formdiv">
+        {% if asglist %}
+        <h5 class="form-header">One-to-One session Assigned List</h5>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Name</th>
+                <th>Request date</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>        
+                <th>Assigned By</th>
+                <th>Actions</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in asglist %}
+                <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <h5 style="color:green;">New Session</h5></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                
+                <td>{{each.name}}</td>
+                <td>{{each.request_datetime}}</td>
+                <td><small>{{each.stuemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+
+                <td> <small>{{each.assigned_by}} </small> </td>
+                <td>          
+                    <a class="btn btn-success m-1" href="{% url 'vol_oto_accept_url' each.id %}">Accept</a> 
+                    <a class="btn btn-danger m-1" href="{% url 'vol_oto_reject_url' each.id %}">Reject</a>  
+                </td>
+                <td><a href="{% url 'vol_oto_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        
+        {% else %}
+        <h5>Oops! There seems to be no assigned requests currently</h5>
+        {% endif %}
+        </div>
+  
+
+
+    <!-- Oto accepted List -->
+    <div class="row formdiv">
+        {% if acclist %}
+        <h5 class="form-header">One-to-One session Accepted List</h5>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Name</th>
+                <th>Requested date</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Accepted by</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in acclist %}
+                <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <h5 style="color:green;">New Session</h5></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                
+                <td>{{each.name}}</td>
+                <td>{{each.request_datetime}}</td>
+                <td><small>{{each.stuemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td> <small> {{each.accepted_by}} </small></td>
+                <td>{{each.ticket_status}}</td>
+                <td>          
+                    <a class="btn btn-success" href="{% url 'vol_oto_workinprogress_url' each.id %}">work-in-progress</a> 
+ 
+                </td>
+                <td><a href="{% url 'vol_oto_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        
+        {% else %}
+        <h5>Oops! There seems to be no accepted sessions currently</h5>
+        {% endif %}
+        </div>
+    
+
+    <!-- Oto work in progress List -->
+    <div class="row formdiv">
+        {% if worklist %}
+        <h5 class="form-header">One-to-One session work-in-progress List</h5>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Name</th>
+                <th>Requested date</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Actions</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in worklist %}
+                <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <h5 style="color:green;">New Session</h5></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                
+                <td>{{each.name}}</td>
+                <td>{{each.request_datetime}}</td>
+                <td><small>{{each.stuemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>          
+                    <a class="btn btn-success" href="{% url 'vol_oto_feedback_url' each.id %}">Close</a>   
+                </td>
+                <td><a href="{% url 'vol_oto_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        
+        {% else %}
+        <h5>Oops! There seems to be no work-in-progress sessions currently</h5>
+        {% endif %}
+        </div>
+
+
+    <!-- Oto closed List -->
+    <div class="row formdiv">
+        {% if closedlist %}
+        <h5 class="form-header">One-to-One session Closed List</h5>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Sl No</th>
+                <th>Session name</th>
+                <th>Name</th>
+                <th>Request date</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>course</th>
+                <th>Status</th>
+                <th>Hours</th>
+                <th>Info</th>
+            </tr>
+            <tbody>
+            {% for each in closedlist %}
+                <tr class="text-center rounded-1 tablelist">
+                <td>{{forloop.counter}}</td>
+                {% if each.other %}
+                <td>{{each.other_desc}}
+                <h5 style="color:green;">New Session</h5></td>
+                {% else %}
+                <td>{{each.session}}</td>
+                {% endif %}
+                
+                <td>{{each.name}}</td>
+                <td>{{each.request_datetime}}</td>
+                <td><small>{{each.stuemail}}</small></td>
+                <td>{{each.mobile}}</td>
+                <td>{{each.course}}</td>
+                <td>{{each.ticket_status}}</td>
+                <td>{{each.hours}} hours</td>
+                <td><a href="{% url 'vol_oto_detail_url' each.id %}">Info</a></td>
+
+                </tr>
+            {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        
+        {% else %}
+        <h5>Oops! There seems to be no closed sessions currently</h5>
+        {% endif %}
+        </div>
+  
+
+
+</div>
+            
+{% endblock %}

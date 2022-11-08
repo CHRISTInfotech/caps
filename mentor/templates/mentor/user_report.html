@@ -1,0 +1,158 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block style%}
+<style>
+    .headerdiv{
+		background-color: rgb(239, 197, 91);
+		padding: .4rem;
+		border-radius: .4rem;
+		text-align: center;
+	}
+	.formdiv{
+		padding-top: .2rem;
+		
+	}
+	table {
+		overflow-x: scroll;
+		display: block;
+        max-height: 100vh;
+		/* height: 400px; */
+	}
+</style>
+{% endblock style%}
+
+{% block content%}
+<!-- form  -->
+<div class="container p-3">
+    <div class="row d-flex formdiv">
+        <h4 class="pb-3 headerdiv">Search users</h4>
+        <div class="col">
+
+            <form method="GET" id="searchform">
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>From Date</label>
+                        {% render_field userfilter.form.start_date class="form-control"%}
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>To Date</label>
+                        {% render_field userfilter.form.end_date class="form-control"%}
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>First name</label>
+                        {% render_field userfilter.form.first_name class="form-control"%}
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Last name</label>
+                        {% render_field userfilter.form.last_name class="form-control"%}
+                    </div>
+                </div>
+                
+
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label>Email</label>
+                        {% render_field userfilter.form.email class="form-control"%}
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Mobile number</label>
+                        {% render_field userfilter.form.mobile class="form-control"%}
+                    </div>
+                    
+                    <div class="form-group col-md-3">
+                        <label>Roles</label>
+                        {% render_field userfilter.form.roles class="form-control"%}
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Active</label>
+                        {% render_field userfilter.form.is_active class="form-control"%}
+                    </div>
+
+
+                </div>
+
+                <div class="form-group ">
+                    <input type="submit" class="btn btn-primary" value="Search">
+                    <a class="btn btn-warning" href="{% url 'user_report_url' %}">Reset</a>                </div>
+              
+            </form>
+        </div>
+    </div>
+
+    <!-- user Request List -->
+    <div class="row formdiv my-4">
+        
+      {% if tempuser %}
+      <h5 class="form-header">Users Information</h4>
+
+      <div class="table-responsive">
+      <table class="table  table-hover" id="tbl_exporttable_to_xls">
+          <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+              <th>Sl No</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Mobile</th>
+              <th>Campus</th>
+              <th>Status</th>
+              <th>Generate report</th>
+          </tr>
+          <tbody>
+          {% for each in tempuser %}
+          <tr class="text-center rounded-1 tablelist">
+              <td>{{forloop.counter}}</td>
+              <td>{{each.first_name}} {{each.last_name}}</td>
+              <td>{{each.roles.roles}}</td>
+              <td><small>{{each.email}}</small></td>
+              <td>{{each.mobile}}</td>
+              <td>{{each.campus}}</td>
+              <td>{{each.is_active}}</td>
+
+              {% if each.roles.roles == "mentor" %}
+              <td></td>
+              {% else %}
+              <td><a href="{% url 'user_report_gen_url' each.id %}" class="btn btn-warning">See Info</a></td>
+              {% endif %}                
+             
+          </tr>
+          {% endfor %}
+          </tbody>
+          </table>
+      </div>
+     
+      {% else %}
+      <h5>Oops! There seems to be no requests currently</h5>
+      {% endif %}
+      </div>
+ 
+</div>
+
+<script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+<script type="text/javascript">
+       function ExportToExcel(type, fn, dl) {
+       var elt = document.getElementById('tbl_exporttable_to_xls');
+       var wb = XLSX.utils.table_to_book(elt, { sheet: "sheet1" });
+       return dl ?
+         XLSX.write(wb, { bookType: type, bookSST: true, type: 'base64' }):
+		 //change the report name to date
+         XLSX.writeFile(wb, fn || ('MySheetName.' + (type || 'xlsx')));
+    }
+</script>
+{% endblock %}
+
+{% block script %}
+<script>
+    function clearform(){
+        document.getElementById("searchform").reset();
+        console.log("hello")
+    }
+</script>
+{% endblock %}

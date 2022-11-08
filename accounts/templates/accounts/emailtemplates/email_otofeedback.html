@@ -1,0 +1,104 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container{
+            background-color: aliceblue;
+            text-align: center;
+            font-family:Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .footer,.header{
+            background-color: rgb(156, 212, 247);
+            padding: 1.2rem;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 1fr ;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(156, 212, 247);
+            padding: 1.2rem;
+        }
+        .maincontent{
+            min-height: 30vh;
+            padding: 2rem;
+            text-align: left;
+        }
+
+        h4{
+            margin: auto;
+        }
+        h4 img{
+            padding: 1.4rem;
+        }
+        a{
+            text-decoration: none;
+            padding: 1.2rem;
+            background-color: rgb(67, 179, 227);
+            border-radius: 1rem;
+            font-size: 1.2rem;
+            margin: 1rem;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="header">
+           
+            <div class="head-content">
+                <h2>CAPS Session Booking System</h2>
+            </div>
+            
+        </div>
+
+        <div class="maincontent">
+            <img src="" alt="">
+            <p>
+                Dear {{tempoto.name}},
+                <br>
+                Greetings from CAPS!
+                <br>
+                Your registered session has now been completed. We hope you found the session titled {% if tempoto.other %} {{tempoto.other_desc}} {% else %}{{tempoto.session}} {% endif %} to be insightful as well as helpful. We are constantly striving to provide excellent service, and so we would request you kindly provide feedback on the session. 
+                
+                The feedback can be given through the link given below.
+                <br>
+                <br>
+            </p>
+            
+            <div class="btn">
+                <a href="{% url 'vol_oto_feedback_url' tempoto.id %}">Give feedback now!</a>
+            </div>
+                
+            <p>
+                <br>
+                <br>
+                You can also provide the feedback at our website.
+                Please enter the ticket number provided earlier and provide feedback through the form. Once again, we thank you for your time. We really appreciate it and look forward to more enriching training sessions in the future!
+                <br>
+                <br>
+                Thanks and regards,
+                <br>
+                <br>
+                Team CAPS
+                Centre for Academic and Professional Support
+                CHRIST (Deemed to be University)
+            </p>
+        </div>
+
+        <div class="footer">
+            
+            <h4>Christ(Deemed to be University)</h4>
+        </div>
+
+    </div>
+</body>
+</html>

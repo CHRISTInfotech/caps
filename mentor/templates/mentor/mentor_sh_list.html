@@ -1,0 +1,60 @@
+{% extends 'mentor/mentor_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+<!-- Student head List -->
+<div class="container list p-3">
+    <div class="row formdiv">
+        {% if templist %}
+        <h4 class="form-header">Student head List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+              <th>Sl No</th>
+              <th>Volunteer name</th>
+              <th>Campus</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Session hours</th>
+              <th>Wing</th>
+              <th>Actions</th>
+            </tr>
+          <tbody>
+          {% for each in templist %}
+            <tr class="text-center">
+              <td>{{forloop.counter}}</td>
+              <td>{{each.user.first_name}} {{each.user.lastname}}</td>
+              <td>{{each.user.campus}}</td>
+              <td>{{each.user.mobile}}</td>
+              <td> <small>{{each.user.email}} </small> </td>
+              <td>{{each.total_session_hrs}}</td>
+              <td>{{each.wing}}</td>
+              <td>
+                {% if each.user.is_active %}
+                <a class="btn btn-danger m-1" href="{% url 'mentor_set_user_inactive_url' each.user.id %}" onclick="return confirm('Are you sure to Make the user inactive?')">Make inactive</a>
+                {% else %}
+                <a class="btn btn-success m-1" href="{% url 'mentor_set_user_active_url' each.user.id %}" onclick="return confirm('Are you sure?')">Make active</a>
+                {% endif %}
+                <a class="btn btn-primary m-1" href="{% url 'mentor_sh_update_url' each.user.id %}">Update</a>
+                <a class="btn btn-primary m-1" href="{% url 'mentor_change_role_url' each.user.id %}" onclick="return confirm('Are you sure to Change the role?')">Change Role</a>
+
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      {% else %}
+      <h5>Oops! There seems to no volunteers currently</h5>
+      {% endif %}
+    </div>
+  </div>
+</div>
+                
+{% endblock %}
+
+{% block script %}
+{% endblock %}

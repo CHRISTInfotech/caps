@@ -1,0 +1,19 @@
+{% autoescape off %}
+Hello {{user.name}},
+Greetings from CAPS!
+
+Your registered session has now been completed. We hope you found the session titled {% if tempoto.other %} {{tempoto.other_desc}} {% else %}{{tempoto.session}} {% endif %} to be insightful as well as helpful. We are constantly striving to provide excellent service, and so we would request you kindly provide feedback on the session. 
+The feedback can be given through the link given below.
+
+{{ protocol }}://{{ domain }}{% url 'oto_s_feedback_url' uidb64=uid  %}
+
+You can also provide the feedback at our website.
+Please enter the ticket number provided earlier and provide feedback through the form. Once again, we thank you for your time. We really appreciate it and look forward to more enriching training sessions in the future!
+               
+Thanks and regards,
+
+Team CAPS
+Centre for Academic and Professional Support
+CHRIST (Deemed to be University)
+
+{% endautoescape %}

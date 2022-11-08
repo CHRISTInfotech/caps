@@ -1,0 +1,53 @@
+{% extends 'studenthead/sh_base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content%}
+
+
+<!-- Volunteer List -->
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header">Volunteer List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+              <th>Sl No</th>
+              <th>Volunteer name</th>
+              <th>Campus</th>
+              <th>Mobile</th>
+              <th>Email</th>
+              <th>Register Number</th>
+              <th>Passout</th>
+              <th>Actions</th>
+            </tr>
+          <tbody>
+          {% for each in templist %}
+            <tr>
+              <td>{{forloop.counter}}</td>
+              <td>{{each.user.first_name}}</td>
+              <td>{{each.campus}}</td>
+              <td>{{each.user.mobile}}</td>
+              <td>{{each.user.email}}</td>
+              <td>{{each.regno}}</td>
+              <td>{{each.passout}}</td>
+              
+              <td>
+                {% if each.user.is_active%}
+                <a class="btn btn-danger m-1" href="{% url 'set_user_inactive_volunteer_url' each.user.id %}">Make inactive</a>
+                {% endif %}
+                <a class="btn btn-primary m-1" href="{% url 'sh_volunteer_update_url' each.user.id %}">Update</a>
+                <a class="btn btn-warning m-1" href="{% url 'sh_volunteer_detail_url' each.id %}">Info</a></td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+                
+{% endblock %}
+
+{% block script %}
+{% endblock %}

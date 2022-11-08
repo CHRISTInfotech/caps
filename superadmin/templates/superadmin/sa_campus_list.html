@@ -1,0 +1,46 @@
+{% extends 'superadmin/sa_base.html' %}
+{% load static %}
+
+{% block content%}
+
+<!-- Messages -->
+{% if messages %}
+{% for message in messages %}
+
+<div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+    {{message}}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+{% endfor %}
+{% endif %}
+<!-- campus List -->
+<div class="container list p-3">
+    <div class="row formdiv">
+        <h4 class="form-header">Campus List</h4>
+
+        <div class="table-responsive">
+        <table class="table  table-hover">
+            <tr class=" text-white text-center rounded-1 tablelist" id="tablelist">
+                <th>Slno</th>
+                <th>Campus</th>
+            </tr>
+            
+
+            {% for each in templist %}
+            <tr class="text-center">
+                <td>{{forloop.counter}}</td>
+                <td>{{each.campus}}</td>
+            </tr>
+            {% endfor %}
+            
+        </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+{% endblock %}

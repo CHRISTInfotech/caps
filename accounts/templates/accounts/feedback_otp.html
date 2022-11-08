@@ -1,0 +1,72 @@
+{% extends 'accounts/allbase.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<nav>
+    <div class="menu-icon">
+          <i class="fa fa-bars fa-1x"></i>
+    </div>
+    <div class="logo">
+          <img src= "{% static 'assets/img/Capslogo-own.png' %}" alt="logo" class="img-fluid">     
+    </div>
+
+    <div class="menu">
+          <ul>
+                <li><a href="{% url 'index_url' %}">Home</a></li>
+                <li><a href="{% url 'usersessionlist_url' %}">Sessions List</a></li>
+                <li><a href="{% url 'feedback_verification_url' %}">Feedback</a></li>
+                <li><a href="{% url 'login_url' %}">Login</a></li>
+                <li><a href="{% url 'login_url' %}"> <img src= "{% static 'assets/img/christlogo.jpg' %}" alt="logo" class="img-fluid" width="100px">  </a></li>
+          </ul>
+    </div>
+
+</nav>
+{% block style %}
+<style>
+    .form-control{
+        background-color: rgb(216, 234, 249)!important;
+    }
+
+    .btn-succes{
+        background-color: greenyellow;
+    }
+    .btn-succes:hover{
+        background-color: rgb(23, 109, 13);
+    }
+</style>
+{% endblock %}
+
+
+{% block content%}
+
+
+<div class="container">
+
+    {% if messages %}
+        <div class="col">
+        <div class="card card-body">
+        {% for message in messages %}
+        <p{% if message.tags == "success" %} class="alert alert-success "{% endif %}>{{ message }}</p>
+        {% if message == 'danger' %}
+        <p{% if message.tags == 'danger'  %} class="alert alert-danger"{% endif %}>{{ message }}</p>
+        {% endif %}
+        {% endfor %}
+        </div>
+        </div>
+    {% endif %}
+
+
+    <div class="row formdiv">
+
+        <h4 class="text-center">Enter the OTP sent to your university email</h4>
+        <form action="" class="form-group" method="POST">
+            {% csrf_token %}
+            {{form.errors}}
+            {{form}}
+            <input type="submit" class="btn btn-succes m-3" value="Submit">
+        </form>
+    </div>
+</div>
+
+
+{% endblock content %}

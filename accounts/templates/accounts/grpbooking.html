@@ -1,0 +1,168 @@
+{% extends 'accounts/allbase.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block style%}
+<style>
+    #id_other_desc {
+        pointer-events: none;
+    }
+
+    #content{
+        background: rgba(0, 0, 0, 0.7)url("{% static '/assets/img/bg-2.jpg' %}");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-blend-mode: darken;
+        color: aliceblue;
+    }
+    textarea{
+        max-height: 90px;
+    }
+    .btn{
+        width: 100%;
+        background-color: transparent !important;
+        color: aliceblue;
+        outline: none;
+        border: 1px solid aliceblue;
+    }
+
+    .btn:hover{
+        background-color: rgb(47, 151, 255) !important;
+        border: 1px solid rgb(47, 151, 255);
+        color: black;
+    }
+</style>
+{% endblock style %}
+
+{% block content%}
+
+  <!-- Page Content  -->
+  <div id="content" class="p-4 p-md-5 pt-5 text-center">
+    <div>
+        <h2 class="row-4 text-center"> Peer group  Session Booking <span class="float-right"></span></h2>
+    </div>
+        <div class="row">
+            <div class="col-md-2">
+
+
+            </div>
+            <div class="col-md-8 ">
+           
+                <form action="" method="POST">
+                    {% csrf_token %}
+                                        
+                    {% if form.errors %}
+                            <div class="alert alert-danger ">
+                            {{form.errors}}
+                            </div>
+                        {% endif %}
+                    
+                    
+                    <div class="form-row row m-1">
+                        <div class="form-group ">
+                            <label for="id_session">Session required</label>
+                            {{form.session}}
+                        </div>
+                    </div>
+
+                    <div class="form-row row m-1">
+                        <div class="form-group ">
+                            {{form.other}}
+                            <label for="id_other">Please tick if you need other session which is not in the list?</label>
+                        </div>
+                    </div>
+
+                    <div class="form-row row m-1">
+                        <div class="form-group ">
+                            <!-- <label for="id_other_desc">Description of the new session</label> -->
+                            {{form.other_desc}}
+                        </div>
+                    </div>
+
+                    <div class="form-row row m-1">
+                        <div class="form-group  col-md-4">
+                            <label for="id_name">Name</label>
+                            {{form.name}}
+                        </div>
+
+                        <div class="form-group  col-md-8">
+                            <label for="id_stuemail">Email id</label>
+                            {{form.facultyemail}}
+                        </div>
+                    </div>
+
+                    <div class="form-row row m-1">
+                        <div class="form-group col-md-4 ">
+                            <label for="id_mobile">Mobile</label>
+                            {{form.mobile}}
+                        </div>
+
+                        <div class="form-group col-md-4 ">
+                            <label for="id_campus">Campus</label>
+                            {{form.campus}}
+                        </div>
+
+                        <div class="form-group col-md-2 ">
+                            <label for="id_campus">Session Date</label>
+                            {{form.sessiondate}}
+                        </div>
+
+                        <div class="form-group col-md-2 ">
+                            <label for="id_campus">Session Time</label>
+                            {{form.sessiontime}}
+                        </div>
+                    </div>
+
+                    <div class="form-row row m-1">
+                        <div class="form-group col-md-6 ">
+                            <label for="id_course">Course</label>
+                            {{form.course}}
+                        </div>
+
+                        <div class="form-group col-md-6 ">
+                            <label for="id_dept">Department</label>
+                            {{form.dept}}
+                        </div>
+                    </div>
+    
+                    <div class="form-row row mt-3 mx-1">
+                        <div class="form-group  col-md-6">
+                            <input type="submit" class="btn " value="Register">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="reset" class="btn ">
+                        </div>                               
+                    </div>
+                </form>
+                
+            </div>  
+            
+            <div class="col-md-3">
+                
+            </div>
+        </div>
+  </div>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript">
+
+
+    $(function () {
+        $("input[id='id_other']").click(function () {
+            if ($("#id_other").is(":checked")) {
+                $("#id_other_desc").removeAttr("disabled");
+                $('#id_other_desc').attr('required',true);
+                $("#id_other_desc").focus();
+                $("#id_session").val("");
+                console.log("hello")
+            } else {
+                $("#id_other_desc").attr("disabled", "disabled");
+            }
+        });
+    });
+
+
+    // code to disable previous dates and next sven dates in datetime picker
+    </script>
+    
+    {% endblock %}
