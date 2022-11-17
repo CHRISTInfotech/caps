@@ -1,0 +1,74 @@
+#sidebar{
+    background-color: rgb(64, 166, 250);
+    background-color: rgb(9, 52, 144);
+}
+body{
+    overflow-x: hidden;
+    background-color: black;
+}
+#sidebar{
+    box-shadow: 1px 1px 5px -2px rgba(0,0,0,0.78);
+}
+#content{
+    background-color:rgb(227, 241, 255);
+}
+.custom-menu{
+    z-index: 10;
+}
+.header-bar{
+    background-color: rgb(255, 255, 255) !important;
+    padding: .4rem;
+    border-radius: .4rem;
+    z-index: 2;
+}
+
+.formdiv {
+    background-color: rgb(254, 255, 255);
+    box-sizing: border-box;
+    margin: .6rem;
+    padding: .2rem;
+    padding-top : .6rem;
+    border-radius: .6rem;
+    box-shadow: 1px 1px 5px -2px rgba(0,0,0,0.78);
+}
+
+.formdiv input, .formdiv select{
+    background-color: aliceblue;
+}
+
+.formdiv input:focus{
+    background-color: rgb(204, 227, 246);
+}
+
+.formdiv select:focus{
+    background-color: rgb(204, 227, 246);
+}
+
+/* table style */
+/* tr:nth-child(odd){
+    background-color: rgb(209, 229, 246) !important;
+} */
+
+#tablelist{
+    background-color: rgb(64, 166, 250)!important;
+}
+
+
+/* scrollbar */
+body::-webkit-scrollbar {
+        width: .3rem;
+}
+
+body::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: rgb(77, 114, 226);
+    outline: 1px solid rgb(234, 240, 246);
+}
+
+.logoutbtn{
+    background-color: rgb(21, 28, 79);
+    color: aliceblue;
+}
