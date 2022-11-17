@@ -148,7 +148,7 @@ if DEBUG == False:
     STATIC_URL = 'static/'
     STATIC_ROOT = '/home/administrator/caps/static'
     STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, 'static')
+        os.path.join(BASE_DIR, 'static/')
     ]
 
     MEDIA_URL = '/media/'
