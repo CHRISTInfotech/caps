@@ -26,14 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-dkx=l(n(n^+(gq-3-ot=39_t-u_gx=@k*9)514azsk=^=ffjgr'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['10.5.5.32','*']
-=======
-# if DEBUG
-ALLOWED_HOSTS = []
->>>>>>> a5eed4da9628633beb0868d442d8c8e305f2f2ee
+if DEBUG == False:
+    ALLOWED_HOSTS = ['10.5.5.32']
+else:
+    ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     'accounts',
     'superadmin',
     'mentor',
@@ -66,14 +64,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-AUTH_USER_MODEL ='accounts.User'
+AUTH_USER_MODEL = 'accounts.User'
 
 ROOT_URLCONF = 'CAPS.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -92,25 +90,24 @@ WSGI_APPLICATION = 'CAPS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-
-# }
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'caps',
-        'USER': 'capsadmin',
-        'PASSWORD': 'capsadmin@2022',
-        'HOST': 'localhost',
-        'PORT': '',
+if DEBUG == False:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'caps',
+            'USER': 'capsadmin',
+            'PASSWORD': 'capsadmin@2022',
+            'HOST': 'localhost',
+            'PORT': '',
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -136,8 +133,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-
-TIME_ZONE =  'Asia/Kolkata'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -148,14 +144,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'staticfiles'),
-)
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+if DEBUG == False:
+    STATIC_URL = 'static/'
+    STATIC_ROOT = '/home/administrator/caps/static'
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, 'static')
+    ]
 
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'MEDIA')
-MEDIA_URL = '/MEDIA/'
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = '/home/administrator/caps/media/'
+else:
+    STATIC_URL = 'static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, '/static')
+    STATICFILES_DIRS = [BASE_DIR / "static"]
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -165,7 +169,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-X_FRAME_OPTIONS='SAMEORIGIN'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -175,9 +179,9 @@ EMAIL_HOST_USER = 'nikhil.m@mca.christuniversity.in'
 EMAIL_HOST_PASSWORD = 'Nil24min@christ'
 
 MESSAGE_TAGS = {
-        messages.DEBUG: 'alert-secondary',
-        messages.INFO: 'alert-info',
-        messages.SUCCESS: 'alert-success',
-        messages.WARNING: 'alert-warning',
-        messages.ERROR: 'alert-danger',
+    messages.DEBUG: 'alert-secondary',
+    messages.INFO: 'alert-info',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.ERROR: 'alert-danger',
 }

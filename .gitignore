@@ -7,3 +7,7 @@ superadmin/__pycache__/*
 superadmin/migrations/__pycache__/*
 volunteer/__pycache__/*
 volunteer/migrations/__pycache__/*
+
+venv/*
+db.sqlite3
+

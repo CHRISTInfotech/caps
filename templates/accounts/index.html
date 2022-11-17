@@ -3,122 +3,123 @@
 
 {% block style %}
 <style>
-      .card-body a{
+      .card-body a {
             text-decoration: none;
       }
 </style>
 {% endblock style %}
 
 {% block content%}
-      <div class="container-fluid">
-            <div class="row">
-                  <div class="col-md-4 nopadding" style="background-color: #3167E3">
-                        <div class="content"
-                              style="text-align:center; color: #fff; font-size: 2.7rem; font-family: 'Nunito', sans-serif; font-weight: 500;">
-                              Our Services
-                        </div>
+<div class="container-fluid">
+      <div class="row">
+            <div class="col-md-4 nopadding" style="background-color: #3167E3">
+                  <div class="content"
+                        style="text-align:center; color: #fff; font-size: 2.7rem; font-family: 'Nunito', sans-serif; font-weight: 500;">
+                        Our Services
                   </div>
-                  <div class="col-md-4 nopadding d-flex justify-content-center" style="background-color: #070727">
+            </div>
+            <div class="col-md-4 nopadding d-flex justify-content-center" style="background-color: #070727">
 
-                        <div class="card mt-5"
-                              style="width: 25rem; background-color: #070727; text-align:center; color: #fff; font-family: 'Nunito', sans-serif; font-size: 1.7rem; font-weight: 500;">
-                              <img src="{% static '/assets/img/oto.jpg' %}"   class="card-img-top" alt="...">
-                              <div class="card-body">
-                                    <a href="{% url 'oto_booking_url' %}"><p class="card-text">One to One Session</p></a>
-                              </div>
-                        </div>
-                  </div>
-                  <div class="col-md-4 nopadding d-flex justify-content-center"
-                        style="background-color: #CCDFF6;">
-                        <div class="card mt-5"
-                              style="border-color: #CCDFF6; width: 25rem; background-color: #CCDFF6; text-align:center; color: #000; font-family: 'Nunito', sans-serif; font-size: 1.7rem; font-weight: 500;">
-                              <img src="{% static '/assets/img/grp.jpg' %}" class="card-img-top" alt="...">
-                              <div class="card-body" style=" background-color: #CCDFF6;">
-                                    <a href="{% url 'grp_booking_url' %}"><p class="card-text">Group Session</p></a>
-                              </div>
+                  <div class="card mt-5"
+                        style="width: 25rem; background-color: #070727; text-align:center; color: #fff; font-family: 'Nunito', sans-serif; font-size: 1.7rem; font-weight: 500;">
+                        <img src="{% static 'accounts/assets/img/oto.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                              <a href="{% url 'oto_booking_url' %}">
+                                    <p class="card-text">One to One Session</p>
+                              </a>
                         </div>
                   </div>
             </div>
-            <div class="row">
-                  <div class="col-md-6 nopadding d-flex justify-content-center">
-                        <div class="content"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              <img class="img-fluid" src="{% static '/assets/img/capshero.jpg' %}" alt="">
-                        </div>
-                  </div>
-                  <div class="col-md-6 nopadding d-flex justify-content-center"
-                        style="background-color: #1134FD;">
-                        <div class="content"
-                              style="color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              At its core, the Centre for Academic and Professional Support (CAPS) provides
-                              assistance in academic and professional spheres to anyone who may need it. The
-                              doors of CAPS are open to students, faculty, researchers, and anyone seeking
-                              support. At an individual level, CAPS helps one attain greater proficiencies
-                              in competencies related to the academic and professional spheres, through a
-                              wide array of topics, ranging from research to career readiness.
-
+            <div class="col-md-4 nopadding d-flex justify-content-center" style="background-color: #CCDFF6;">
+                  <div class="card mt-5"
+                        style="border-color: #CCDFF6; width: 25rem; background-color: #CCDFF6; text-align:center; color: #000; font-family: 'Nunito', sans-serif; font-size: 1.7rem; font-weight: 500;">
+                        <img src="{% static 'accounts/assets/img/grp.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body" style=" background-color: #CCDFF6;">
+                              <a href="{% url 'grp_booking_url' %}">
+                                    <p class="card-text">Group Session</p>
+                              </a>
                         </div>
                   </div>
             </div>
-            <div class="row">
-                  <div class="col-md-12">
-                        <div class="content"
-                              style="text-align:center; color: #000; font-size: 2rem; font-family: 'Nunito', sans-serif;">
-                              Lets Explore
-                        </div>
-                  </div>
-            </div>
-            <div class="row">
-                  <div class="col-md-6 nopadding d-flex justify-content-center">
-                        <div class="content"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              <img class="img-fluid" src="{% static '/assets/img/sessionreq.jpg' %}" alt=""> 
-                        </div>
-                  </div>
-                  <div class="col-md-6 nopadding d-flex justify-content-center text-center"
-                        style="background-color: #1134FD;">
-                        <div class="content md-5"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              Select which kind of session you want to select. One-on-one(if you are a student) or
-                              Peer-learning ( if you are a faculty requesting for your class)
-                        </div>
-                  </div>
-            </div>
-            <div class="row">
-
-                  <div class="col-md-6 nopadding d-flex justify-content-center text-center"
-                        style="background-color: #1134FD;">
-                        <div class="content md-5"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              Fill the form providing the requested data. If you are a faculty, register first to
-                              request the Peer session.
-
-                        </div>
-                  </div>
-                  <div class="col-md-6 nopadding d-flex justify-content-center">
-                        <div class="content"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              <img class="img-fluid" src="{% static '/assets/img/form.png' %}" alt=""> 
-                        </div>
-                  </div>
-            </div>
-            <div class="row">
-                  <div class="col-md-6 nopadding d-flex justify-content-center">
-                        <div class="content"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              <img class="img-fluid" src="{% static '/assets/img/email.png' %}" alt=""> 
-                        </div>
-                  </div>
-                  <div class="col-md-6 nopadding d-flex justify-content-center text-center"
-                        style="background-color: #1134FD;">
-                        <div class="content md-5"
-                              style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
-                              Once your request has been accepted , you will recieve an email from
-                              CAPS informing the date and volunteer details for the session.
-                        </div>
-                  </div>
-            </div>
-
-            
       </div>
+      <div class="row">
+            <div class="col-md-6 nopadding d-flex justify-content-center">
+                  <div class="content"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        <img class="img-fluid" src="{% static 'accounts/assets/img/capshero.jpg' %}" alt="">
+                  </div>
+            </div>
+            <div class="col-md-6 nopadding d-flex justify-content-center" style="background-color: #1134FD;">
+                  <div class="content" style="color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        At its core, the Centre for Academic and Professional Support (CAPS) provides
+                        assistance in academic and professional spheres to anyone who may need it. The
+                        doors of CAPS are open to students, faculty, researchers, and anyone seeking
+                        support. At an individual level, CAPS helps one attain greater proficiencies
+                        in competencies related to the academic and professional spheres, through a
+                        wide array of topics, ranging from research to career readiness.
+
+                  </div>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-md-12">
+                  <div class="content"
+                        style="text-align:center; color: #000; font-size: 2rem; font-family: 'Nunito', sans-serif;">
+                        Lets Explore
+                  </div>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-md-6 nopadding d-flex justify-content-center">
+                  <div class="content"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        <img class="img-fluid" src="{% static 'accounts/assets/img/sessionreq.jpg' %}" alt="">
+                  </div>
+            </div>
+            <div class="col-md-6 nopadding d-flex justify-content-center text-center"
+                  style="background-color: #1134FD;">
+                  <div class="content md-5"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        Select which kind of session you want to select. One-on-one(if you are a student) or
+                        Peer-learning ( if you are a faculty requesting for your class)
+                  </div>
+            </div>
+      </div>
+      <div class="row">
+
+            <div class="col-md-6 nopadding d-flex justify-content-center text-center"
+                  style="background-color: #1134FD;">
+                  <div class="content md-5"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        Fill the form providing the requested data. If you are a faculty, register first to
+                        request the Peer session.
+
+                  </div>
+            </div>
+            <div class="col-md-6 nopadding d-flex justify-content-center">
+                  <div class="content"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        <img class="img-fluid" src="{% static 'accounts/assets/img/form.png' %}" alt="">
+                  </div>
+            </div>
+      </div>
+      <div class="row">
+            <div class="col-md-6 nopadding d-flex justify-content-center">
+                  <div class="content"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        <img class="img-fluid" src="{% static 'accounts/assets/img/email.png' %}" alt="">
+                  </div>
+            </div>
+            <div class="col-md-6 nopadding d-flex justify-content-center text-center"
+                  style="background-color: #1134FD;">
+                  <div class="content md-5"
+                        style="text-align:center; color: #fff; font-size: 1.2rem; font-family: 'Nunito', sans-serif;">
+                        Once your request has been accepted , you will recieve an email from
+                        CAPS informing the date and volunteer details for the session.
+                  </div>
+            </div>
+      </div>
+
+
+</div>
 {% endblock %}

@@ -4,171 +4,182 @@
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>LOGIN</title>
-    <script type="text/javascript" src="{% static '/js/jquery.js'%}"></script> 
-    <script src="{% static '/js/loginvalidations.js'%}"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<style>
-  body{
-      font-family : -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"
-  }
-  #caps
-  {
-    padding-top: 90px;
-    padding-right: 2px;
-    padding-left: 50px;
-    
-  }
-  .form-group
-  {
-    text-align: left;
-  }
-  .formdiv {
+  <title>LOGIN</title>
+  <script type="text/javascript" src="{% static 'accounts/js/jquery.js'%}"></script>
+  <script src="{% static 'accounts/js/loginvalidations.js'%}"></script>
+
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+    }
+
+    #caps {
+      padding-top: 90px;
+      padding-right: 2px;
+      padding-left: 50px;
+
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    .formdiv {
       background-color: white;
       box-sizing: border-box;
       margin: .6rem;
       padding: .2rem;
-      padding-top : .6rem;
+      padding-top: .6rem;
       border-radius: .6rem;
-      box-shadow: 1px 1px 5px -2px rgba(0,0,0,0.78);
+      box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.78);
       text-align: left;
-  }
-
-  .formdiv input, .formdiv select{
-      background-color: aliceblue;
-  }
-
-  .formdiv input:focus{
-      background-color: rgb(204, 227, 246);
-  }
-
-  .formdiv select:focus{
-      background-color: rgb(204, 227, 246);
-  }
-
-  @media screen and (max-width: 1000px) {
-    #texty
-    {
-        display: none;
     }
-    #caps
-    {
+
+    .formdiv input,
+    .formdiv select {
+      background-color: aliceblue;
+    }
+
+    .formdiv input:focus {
+      background-color: rgb(204, 227, 246);
+    }
+
+    .formdiv select:focus {
+      background-color: rgb(204, 227, 246);
+    }
+
+    @media screen and (max-width: 1000px) {
+      #texty {
+        display: none;
+      }
+
+      #caps {
         padding-top: 200px;
         padding-right: 2px;
         padding-left: 50px;
         padding-bottom: -70px;
-      
-    }
 
-  }
-</style>
+      }
+
+    }
+  </style>
 
 </head>
 
-  <body class="text-center">
-   
-  
-    <div class="container">
-     
-          
-        <!--row-->
-        <div class="row" id="leftrow">
-          <div class="col-4">
-            
-                <div class=" col" style="align: left;">
-                  
-            <img id="caps" src="{% static 'img/capslogo12.png' %}" alt="CAPS" width="400" height="400">
-            <div  class="text-center" id="texty">
-                <p ><b> 
-                      CAPS provides assistance in academic and professional areas for anyone who may need it. The doors of CAPS are open to students, faculty, researchers, and anyone who is seeking help.
-                  </b></p>
-             
-              </div>
-      
-       
-    </div>
+<body class="text-center">
+
+
+  <div class="container">
+
+
+    <!--row-->
+    <div class="row" id="leftrow">
+      <div class="col-4">
+
+        <div class=" col" style="align: left;">
+
+          <img id="caps" src="{% static 'accounts/img/capslogo12.png' %}" alt="CAPS" width="400" height="400">
+          <div class="text-center" id="texty">
+            <p><b>
+                CAPS provides assistance in academic and professional areas for anyone who may need it. The doors of
+                CAPS are open to students, faculty, researchers, and anyone who is seeking help.
+              </b></p>
+
           </div>
-          <div class="col-md-2"></div>
-             
-          <div class="col-md-5 " style="padding-top: 120px;">
-          
-            <div class="card formdiv">
-           
-              <div class="card-body">
-                <h2 class="card-title text-center p-3">LOGIN</h2>
-                
 
-                <form method="POST" style="color:black; font-size:1.1em;">
 
-                  {% csrf_token %}
-       
-                  <!-- ***************************** Messages ************************************************************-->
-                  {% if messages %}
-                  {% for message in messages %}
-                  <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
-                    {% if message.tags == "success" %} {% endif %}{{ message }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                  </div>
-                    {% if message == 'danger' %}
-                    <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
-                  {% if message.tags == 'danger'  %} {% endif %}{{ message }}
-                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                    </div>
-                  {% endif %}
-                  {% endfor %}
-                  {% endif %}
-
-                  <!-- Email input -->
-                  <div class="form-outline mb-0">
-                        {{form.username|as_crispy_field }}
-                        <label id="loginemailvalid" style=" font-size: small; font-family: cursive;"></label>
-                    </div>
-                  
-                    <!-- Password input -->
-                    <div class="form-outline mb-0">
-                        {{form.password|as_crispy_field }}
-                        <label id="loginpassvalid" style=" font-size: small; font-family: cursive;"></label>
-                    </div>
-                  
-                    <!-- 2 column grid layout for inline styling -->
-                    <div class="row mb-4">
-
-                    </div>
-                  
-
-                    <!-- Submit button -->
-                    <button type="submit" class="btn btn-primary btn-block mb-4" id="login">Sign in</button>
-                  
-                   
-                    <!-- Register buttons -->
-                    <div class="text-center">
-                      <p><a href="{% url 'password_reset' %}" id="forgot">Forgot password ?</a></p>
-                      </button>
-                    </div>
-                  </form>
-</div>
-</div>
-          </div>
-          <div class="col-sm-1"></div>
         </div>
- 
-</div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  </body>
+      </div>
+      <div class="col-md-2"></div>
+
+      <div class="col-md-5 " style="padding-top: 120px;">
+
+        <div class="card formdiv">
+
+          <div class="card-body">
+            <h2 class="card-title text-center p-3">LOGIN</h2>
+
+
+            <form method="POST" style="color:black; font-size:1.1em;">
+
+              {% csrf_token %}
+
+              <!-- ***************************** Messages ************************************************************-->
+              {% if messages %}
+              {% for message in messages %}
+              <div class="alert alert-success alert-dismissible fade show my-3" role="alert">
+                {% if message.tags == "success" %} {% endif %}{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% if message == 'danger' %}
+              <div class="alert alert-danger alert-dismissible fade show my-3" role="alert">
+                {% if message.tags == 'danger' %} {% endif %}{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              <!-- Email input -->
+              <div class="form-outline mb-0">
+                {{form.username|as_crispy_field }}
+                <label id="loginemailvalid" style=" font-size: small; font-family: cursive;"></label>
+              </div>
+
+              <!-- Password input -->
+              <div class="form-outline mb-0">
+                {{form.password|as_crispy_field }}
+                <label id="loginpassvalid" style=" font-size: small; font-family: cursive;"></label>
+              </div>
+
+              <!-- 2 column grid layout for inline styling -->
+              <div class="row mb-4">
+
+              </div>
+
+
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-primary btn-block mb-4" id="login">Sign in</button>
+
+
+              <!-- Register buttons -->
+              <div class="text-center">
+                <p><a href="{% url 'password_reset' %}" id="forgot">Forgot password ?</a></p>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+
+  </div>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

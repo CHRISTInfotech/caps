@@ -8,12 +8,17 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <meta http-equiv="X-UA-Compatible" content="ie=edge">
       <title>CAPS Website</title>
-      
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-      
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
       <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js"
             integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk"
             crossorigin="anonymous"></script>
@@ -23,74 +28,77 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
       <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
-      <link rel="stylesheet" href="{% static 'css/indexstyle.css'%}">
+      <link rel="stylesheet" href="{% static '/accounts/css/indexstyle.css' %}">
 </head>
 
 
 <style>
-      .menu li{
+      .menu li {
             padding: 1rem;
       }
 
-      .menu li a{
+      .menu li a {
             font-size: 1.2rem;
             font-weight: 400;
-            color:rgb(4, 4, 4);
+            color: rgb(4, 4, 4);
             padding: 1rem;
             border-radius: 1rem;
             transition: .2s;
       }
 
-      .menu li a:hover{
-            color:rgb(220, 228, 251);
+      .menu li a:hover {
+            color: rgb(220, 228, 251);
             background-color: rgb(2, 7, 63);
       }
 
-      nav{
-            transition:.2s;
+      nav {
+            transition: .2s;
             background-color: aliceblue;
             color: black;
       }
 
-      .form{
+      .form {
             background-color: rgb(254, 255, 255);
             box-sizing: border-box;
             margin: .6rem;
             padding: .2rem;
-            padding-top : .6rem;
+            padding-top: .6rem;
             border-radius: .6rem;
-            box-shadow: 1px 1px 5px -2px rgba(0,0,0,0.78);
+            box-shadow: 1px 1px 5px -2px rgba(0, 0, 0, 0.78);
       }
-      
-      .form-group input, .form-group select{
+
+      .form-group input,
+      .form-group select {
             background-color: aliceblue;
       }
-      
-      .form-group input:focus{
+
+      .form-group input:focus {
             background-color: rgb(204, 227, 246);
       }
-      
-      .form-group select:focus{
+
+      .form-group select:focus {
             background-color: rgb(204, 227, 246);
       }
-      .logo img{
+
+      .logo img {
             max-width: 200px;
       }
 
-      
+
       header {
             width: 100%;
             height: 60vh;
-            
-            background: rgba(0, 0, 0, 0.4)url("{% static '/assets/img/hero.png' %}");
+
+            background: rgba(0, 0, 0, 0.4)url("{% static 'accounts/assets/img/hero.png' %}");
             background-position: center;
             background-repeat: no-repeat;
             background-size: cover;
             background-blend-mode: darken;
-            
+
       }
-      nav a{
-            color:aliceblue;
+
+      nav a {
+            color: aliceblue;
       }
 
       /* scrollbar */
@@ -99,12 +107,12 @@
       }
 
       body::-webkit-scrollbar-track {
-      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.632);
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.632);
       }
 
       body::-webkit-scrollbar-thumb {
-      background-color: rgb(77, 114, 226);
-      outline: 0px solid rgb(234, 240, 246);
+            background-color: rgb(77, 114, 226);
+            outline: 0px solid rgb(234, 240, 246);
       }
 </style>
 {% block style %}
@@ -112,14 +120,14 @@
 
 
 <body>
-      <div class="wrapper" >
+      <div class="wrapper">
             <header>
                   <nav>
                         <div class="menu-icon">
                               <i class="fa fa-bars fa-1x"></i>
                         </div>
                         <div class="logo">
-                              <img src= "{% static 'assets/img/Capslogo-own.png' %}" alt="logo" class="img-fluid">     
+                              <img src="{% static 'accounts/assets/img/Capslogo-own.png' %}" alt="logo" class="img-fluid">
                         </div>
 
                         <div class="menu">
@@ -128,7 +136,8 @@
                                     <li><a href="{% url 'usersessionlist_url' %}">Sessions List</a></li>
                                     <li><a href="{% url 'feedback_verification_url' %}">Feedback</a></li>
                                     <li><a href="{% url 'login_url' %}">Login</a></li>
-                                    <a href="{% url 'login_url' %}"> <img src= "{% static 'assets/img/christlogo.png' %}" alt="logo" class="img-fluid" width="180px">  </a>
+                                    <a href="{% url 'login_url' %}"> <img src="{% static 'accounts/assets/img/Capslogo-own.png' %}"
+                                                alt="logo" class="img-fluid" width="180px"> </a>
                               </ul>
                         </div>
 
@@ -137,53 +146,55 @@
 
             <!-- Messages -->
             {% for message in messages %}
-            
-            <div class="alert {{ message.tags }} alert-dismissible fade show p-3 m-3" role="alert" >
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                <!-- <span aria-hidden="true">×</span> -->
-                </button>
-                {{ message }}
+
+            <div class="alert {{ message.tags }} alert-dismissible fade show p-3 m-3" role="alert">
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                        <!-- <span aria-hidden="true">×</span> -->
+                  </button>
+                  {{ message }}
             </div>
-           
+
             {% endfor %}
-            
+
             {% block content %}
             {% endblock %}
-          
+
             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 
                   <div class="col-md-4 d-flex align-items-center justify-content-center">
                         <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                            
+
                               <span class="mb-3 mb-md-0 text-muted">
-                              <img src="{% static '/assets/img/capshero.jpg' %}" class="img-fluid" width=300 alt="">
+                                    <img src="{% static 'accounts/assets/img/capshero.jpg' %}" class="img-fluid" width=300
+                                          alt="">
                               </span>
                         </a>
                   </div>
 
                   <div class="col-md-4 d-flex align-items-center justify-content-center">
-                        
+
                         <p>
                               Contact us
                               <br>
-                        <a href="mailto:caps@christuniversity.in">caps@christuniversity.in</a>
-                        <br>
-                        <a href="tel:+918040129728">+91-80 4012 9728</a>
-                        <br>
-                        
-                        CAPS Office, Room 910, Floor 9, Central Block, CHRIST (Deemed to be
-                        University), Bangalore Central Campus- 560029
+                              <a href="mailto:caps@christuniversity.in">caps@christuniversity.in</a>
+                              <br>
+                              <a href="tel:+918040129728">+91-80 4012 9728</a>
+                              <br>
+
+                              CAPS Office, Room 910, Floor 9, Central Block, CHRIST (Deemed to be
+                              University), Bangalore Central Campus- 560029
                         </p>
-                    
-                        
+
+
                   </div>
 
                   <div class="col-md-4 d-flex align-items-center justify-content-center">
-                  <a href="#" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                        <span class="mb-3 mb-md-0 text-muted">
-                        <img src="{% static '/assets/img/christlogo.png' %}" class="img-fluid" width=260 alt="">
-                        </span>
-                  </a>
+                        <a href="#" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                              <span class="mb-3 mb-md-0 text-muted">
+                                    <img src="{% static 'accounts/assets/img/christlogo.png' %}" class="img-fluid" width=260
+                                          alt="">
+                              </span>
+                        </a>
                   </div>
             </footer>
       </div>
@@ -194,7 +205,7 @@
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script> -->
 
-<script src="{% static 'js/indexmain.js' %}"></script>
+<script src="{% static '/accounts/js/indexmain.js' %}"></script>
 <!-- <script>
       $(document).ready(function(){
             $(window).scroll(function(){
@@ -210,4 +221,5 @@
       })
 
 </script> -->
+
 </html>
